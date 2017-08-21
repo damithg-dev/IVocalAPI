@@ -6,24 +6,24 @@ header("Content-Type: application/json; charset=UTF-8");
  
 // include database and object files
 include_once '../Config/database.php';
-include_once '../objects/Song.php';
+include_once '../objects/Warmups.php';
  
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
 
 // initialize object
-$Songs = new Song($db);
+$Warmups = new Warmups($db);
  
 // query products
-$stmt = $Songs->read();
+$stmt = $Warmups->read();
 $num = $stmt->rowCount();
 // check if more than 0 record found
 if($num>0){
  
     // products array
-    $Songs_arr=array();
-    $Songs_arr["records"]=array();
+    $Warmups_arr=array();
+    $Warmups_arr["Warmups"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -34,25 +34,22 @@ if($num>0){
         // just $name only
         extract($row);
  
-        $Songs_item=array(
+        $Warmups_item=array(
             "id" => $id,
-            "name" => $name,
-            "length" => $length,
-            "description" => $decription,
-            "genre" => $genre,
-            "file" => $file,
-            "img" => $img
+            "title  " => $title,
+            "description" => $description,
+            "imgp" => $imgp
         );
  
-        array_push($Songs_arr["records"], $Songs_item);
+        array_push($Warmups_arr["Warmups"], $Warmups_item);
     }
  
-    echo json_encode($Songs_arr);
+    echo json_encode($Warmups_arr);
 }
  
 else{
     echo json_encode(
-        array("message" => "No Songs found.")
+        array("message" => "No Warmups found.")
     );
 }
 ?>

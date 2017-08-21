@@ -12,6 +12,7 @@ class User{
     public $fbuid;
     public $token;
     public $created;
+    public $frequncey;
  
     // constructor with $db as database connection
     public function __construct($db){
@@ -26,7 +27,7 @@ function create(){
     $query = "INSERT INTO
                 " . $this->table_name . "
             SET
-                uname=:uname, fbuid=:fbuid, token=:token, created=:created";
+                uname=:uname, fbuid=:fbuid, token=:token, created=:created , frequncey=:frequncey";
  
     // prepare query
     $stmt = $this->conn->prepare($query);
@@ -35,13 +36,44 @@ function create(){
     $this->uname=htmlspecialchars(strip_tags($this->uname));
     $this->fbuid=htmlspecialchars(strip_tags($this->fbuid));
     $this->token=htmlspecialchars(strip_tags($this->token));
+    $this->frequncey=htmlspecialchars(strip_tags($this->frequncey));
     $this->created=htmlspecialchars(strip_tags($this->created));
  
     // bind values
     $stmt->bindParam(":uname", $this->uname);
     $stmt->bindParam(":fbuid", $this->fbuid);
     $stmt->bindParam(":token", $this->token);
+    $stmt->bindParam(":frequncey", $this->frequncey);
     $stmt->bindParam(":created", $this->created);
+ 
+    // execute query
+    if($stmt->execute()){
+        return true;
+    }else{
+        return false;
+    }
+}
+function update(){
+
+ 
+    // query to insert record
+    $query = "UPDATE
+                " . $this->table_name . "
+            SET
+                frequncey=:frequncey
+            WHERE
+                id = :id";
+ 
+    // prepare query
+    $stmt = $this->conn->prepare($query);
+ 
+    // sanitize
+    $this->frequncey=htmlspecialchars(strip_tags($this->frequncey));
+ 
+    // bind values
+    $stmt->bindParam(":frequncey", $this->frequncey);
+    $stmt->bindParam(':id', $this->id);
+
  
     // execute query
     if($stmt->execute()){

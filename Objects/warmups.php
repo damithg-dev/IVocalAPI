@@ -17,8 +17,7 @@ class warmups{
         $this->conn = $db;
     }
 
-    // create product
-// read warm ups
+    // read warm ups
 function read(){
  
     // select all query
