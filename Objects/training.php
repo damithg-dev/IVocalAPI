@@ -1,16 +1,16 @@
 <?php
-class Warmups{
+class Training{
  
 
     // database connection and table name
     private $conn;
-    private $table_name = "warmups";
+    private $table_name = "training";
  
     // object properties
-    public $wid;
-    public $wtitle;
-    public $wdescription;
-    public $wimgp;
+    public $tid;
+    public $ttitle;
+    public $tdescription;
+    public $timgp;
  
     // constructor with $db as database connection
     public function __construct($db){
