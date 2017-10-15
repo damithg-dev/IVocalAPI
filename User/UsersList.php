@@ -36,7 +36,9 @@ if($num>0){
         $users_item=array(
             "uid" => $uid,
             "uname" => $uname,
-            "fbuid" => $fbuid
+            "fbuid" => $fbuid,
+            "country" => $country,
+            "level" => $level,
         );
  
         array_push($users_arr["users"], $users_item);

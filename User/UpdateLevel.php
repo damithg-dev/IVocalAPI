@@ -1,6 +1,4 @@
 <?php
-
-
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -13,34 +11,34 @@ include_once '../config/database.php';
  
 // instantiate User object
 include_once '../objects/User.php';
+
  
+// get database connection
 $database = new Database();
 $db = $database->getConnection();
 $User = new User($db);
+
  
 // get posted data
 //$data = json_decode(file_get_contents("php://input"));
 $json = file_get_contents('php://input');
 $data = json_decode($json);
-
-
-// set User property values
-$User->uname = $data->uname;
-$User->fbuid = $data->fbuid;
+ 
+// set ID property of User to be edited
+$User->id = $data->id;
 $User->level = $data->level;
-$User->country = $data->country;
-$User->created = date('Y-m-d H:i:s');
-
-if($User->create()){
+ 
+// update the User
+if($User->updateLevel()){
     echo '{';
-        echo '"message": "User was created."';
+        echo '"message": "User was updated."';
     echo '}';
 }
  
-// if unable to create the User, tell the user
+// if unable to update the User, tell the user
 else{
     echo '{';
-        echo '"message": "Unable to create User."';
+        echo '"message": "unable to update user."';
     echo '}';
 }
 ?>
