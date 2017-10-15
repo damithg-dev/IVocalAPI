@@ -1,11 +1,18 @@
 <?php
 class Database{
 
-    // specify your own database credentials
+    // specify your Local database credentials
     private $host = "localhost";
     private $db_name = "ivocaldb";
     private $username = "root";
     private $password = "root";
+
+    // specify your sever database credentials
+    // private $host = "localhost";
+    // private $db_name = "steadfe6_IV";
+    // private $username = "steadfe6_damith";
+    // private $password = "25638621";
+
     public $conn;
  
     // get the database connection

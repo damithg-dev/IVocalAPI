@@ -1,4 +1,6 @@
 <?php
+
+
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -9,36 +11,37 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 // get database connection
 include_once '../config/database.php';
  
-// instantiate User object
-include_once '../objects/User.php';
-
+// instantiate Reports object
+include_once '../objects/Reports.php';
  
-// get database connection
 $database = new Database();
 $db = $database->getConnection();
-$User = new User($db);
-
+$Reports = new Reports($db);
  
 // get posted data
 //$data = json_decode(file_get_contents("php://input"));
 $json = file_get_contents('php://input');
 $data = json_decode($json);
- 
-// set ID property of User to be edited
-$User->id = $data->id;
-$User->frequncey = $data->frequncey;
- 
-// update the User
-if($User->update()){
+
+
+// set Reports property values
+$Reports->uid = $data->uid;
+$Reports->sid = $data->sid;
+$Reports->score = $data->score;
+$Reports->comments = $data->comments
+$Reports->songcategory = $data->songcategory
+$Reports->created = date('Y-m-d H:i:s');
+
+if($Reports->create()){
     echo '{';
-        echo '"message": "User was updated."';
+        echo '"message": "Reports was created."';
     echo '}';
 }
  
-// if unable to update the User, tell the user
+// if unable to create the Reports, tell the Reports
 else{
     echo '{';
-        echo '"message": "unable to update user."';
+        echo '"message": "Unable to create Reports."';
     echo '}';
 }
 ?>
